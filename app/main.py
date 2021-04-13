@@ -1,12 +1,10 @@
 from typing import List
 
 import traceback
-import json
 
 from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, status
 from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 import logging
@@ -15,6 +13,7 @@ from bridgestyle.arcgis import togeostyler
 from bridgestyle.sld import fromgeostyler
 
 LOG = logging.getLogger(__name__)
+
 
 class Lyrx(BaseModel):
     type: str
@@ -27,7 +26,9 @@ class Lyrx(BaseModel):
     rGBColorProfile: str
     cMYKColorProfile: str
 
+
 app = FastAPI()
+
 
 @app.post("/v1/lyrx2sld/")
 async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = True):
@@ -37,16 +38,19 @@ async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = True):
 
     try:
         geostyler, _, w = togeostyler.convert(lyrx.dict(), options)
-        if w: warnings.append(w)
+        if w:
+            warnings.append(w)
         converted, w = fromgeostyler.convert(geostyler, options)
-        if w: warnings.append(w)
+        if w:
+            warnings.append(w)
         success = True
         errors = []
-        return {'success': success,
-                'sld': converted,
-                'warnings': warnings,
-                'errors': errors
-                }
+        return {
+            'success': success,
+            'sld': converted,
+            'warnings': warnings,
+            'errors': errors
+            }
 
     except Exception as e:
         converted = ''
@@ -54,8 +58,11 @@ async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = True):
         errors = traceback.format_exception(None, e, e.__traceback__)
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            content=jsonable_encoder({'success': success,
+            content=jsonable_encoder(
+                {
+                    'success': success,
                     'sld': converted,
                     'warnings': warnings,
-                    'errors': errors})
+                    'errors': errors
+                })
             )
