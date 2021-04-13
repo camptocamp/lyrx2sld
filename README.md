@@ -1,5 +1,5 @@
 # lyrx2sld
-REST service for the conversion of ArcGIS Pro styling (format .lyrx) to GeoServer (format .sld). The service encapsulates the [bridge-style](https://github.com/camptocamp/bridge-style) Python libary and runs in Docker
+REST service for the conversion of ArcGIS Pro styling (format .lyrx) to GeoServer (format .sld). The service encapsulates the [bridge-style](https://github.com/camptocamp/bridge-style) Python library and runs in Docker
 
 ## Local build and deploy
 ```
