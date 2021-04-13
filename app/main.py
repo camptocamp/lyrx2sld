@@ -30,11 +30,13 @@ class Lyrx(BaseModel):
 app = FastAPI()
 
 @app.post("/lyrx2sld/")
-async def lyrx_to_sld(lyrx: Lyrx):
-    options = {'tolowercase': True, 'replaceesri': True} #TODO: pass as parameters
+async def lyrx_to_sld(lyrx: Lyrx, replaceesri = True):
+    
+    options = {'tolowercase': True, 'replaceesri': replaceesri}
     warnings = []
+
     try:
-        geostyler, _, w = togeostyler.convert(lyrx.dict())
+        geostyler, _, w = togeostyler.convert(lyrx.dict(), options)
         if w: warnings.append(w)
         converted, w = fromgeostyler.convert(geostyler, options)
         if w: warnings.append(w)

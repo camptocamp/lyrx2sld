@@ -7,3 +7,4 @@ docker build -t lyrx2sld .
 docker run -p 80:80 lyrx2sld
 ```
 lyrx data should then be sent as JSON to http://localhost/lyrx2sld/ through a POST request. The converted sld styling is sent back in the response content
+Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols (`true` (default) or `false`)
