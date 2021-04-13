@@ -3,7 +3,7 @@ from typing import List
 import traceback
 
 from pydantic import BaseModel
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Response
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
@@ -43,25 +43,15 @@ async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = True):
         converted, w = fromgeostyler.convert(geostyler, options)
         if w:
             warnings.append(w)
-        success = True
-        errors = []
-        return {
-            'success': success,
-            'sld': converted,
-            'warnings': warnings,
-            'errors': errors
-            }
+        return Response(content=converted, media_type="application/xml")
+
 
     except Exception as e:
-        converted = ''
-        success = False
         errors = traceback.format_exception(None, e, e.__traceback__)
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             content=jsonable_encoder(
                 {
-                    'success': success,
-                    'sld': converted,
                     'warnings': warnings,
                     'errors': errors
                 })
