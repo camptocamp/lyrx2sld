@@ -29,9 +29,9 @@ class Lyrx(BaseModel):
 
 app = FastAPI()
 
-@app.post("/lyrx2sld/")
-async def lyrx_to_sld(lyrx: Lyrx, replaceesri = True):
-    
+@app.post("/v1/lyrx2sld/")
+async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = True):
+
     options = {'tolowercase': True, 'replaceesri': replaceesri}
     warnings = []
 
