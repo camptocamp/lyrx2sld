@@ -1,11 +1,18 @@
 # lyrx2sld
 REST service for the conversion of ArcGIS Pro styling (format .lyrx) to GeoServer (format .sld). The service encapsulates the [bridge-style](https://github.com/camptocamp/bridge-style) Python library and runs in Docker
 
-## Local build and deploy
+#### Local build and deploy
 ```
 docker build -t lyrx2sld .
-docker run -p 80:80 lyrx2sld
+docker run -d -p 80:80 lyrx2sld
 ```
-lyrx data should then be sent as JSON to http://localhost/lyrx2sld/ through a POST request. The converted sld styling is sent back in the response content.
+
+#### Alternative: using image from dockerhub
+```
+docker run -d -p 80:80 vuilleumierc/lyrx2sld:latest
+```
+
+#### Usage
+lyrx data should be sent as JSON to http://localhost/v1/lyrx2sld/ through a POST request. The converted sld styling is sent back in the response content.
 
 Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols (`true` (default) or `false`)
