@@ -13,12 +13,19 @@ docker run --rm -d --name lyrx2sld -p 80:80 vuilleumierc/lyrx2sld:latest
 ```
 
 #### Usage
-lyrx data should be sent as JSON to http://localhost/v1/lyrx2sld/ through a POST request. The converted sld styling is sent back in the response content. Example using `curl`:
+lyrx data should be sent as JSON to http://localhost/v1/lyrx2sld/ through a POST request. The converted sld styling is sent back in the response content (content type: application/xml). Example using `curl`:
 ```
-curl -d @input.json http://localhost/v1/lyrx2sld/ -o output.sld
+curl -d @/path/to/input.json http://localhost/v1/lyrx2sld/ -o /path/to/output.sld
 ```
 
 Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols, to be set to `true` (default) or `false`:
 ```
-curl -d @input.json "http://localhost/v1/lyrx2sld/?replaceesri=false" -o output.sld
+curl -d @/path/to/input.json "http://localhost/v1/lyrx2sld/?replaceesri=false" -o /path/to/output.sld
+
 ```
+Warnings and errors from bridge-style are written to the logs - to view them:
+```
+docker logs lyrx2sld
+```
+
+If the conversion fails, the response contains a JSON object (content type:application/json) with the warnings and errors that occured
