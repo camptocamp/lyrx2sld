@@ -13,6 +13,12 @@ docker run --rm -d --name lyrx2sld -p 80:80 vuilleumierc/lyrx2sld:latest
 ```
 
 #### Usage
-lyrx data should be sent as JSON to http://localhost/v1/lyrx2sld/ through a POST request. The converted sld styling is sent back in the response content.
+lyrx data should be sent as JSON to http://localhost/v1/lyrx2sld/ through a POST request. The converted sld styling is sent back in the response content. Example using `curl`:
+```
+curl -d @input.json http://localhost/v1/lyrx2sld/ -o output.sld
+```
 
-Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols, to be set to `true` (default) or `false`
+Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols, to be set to `true` (default) or `false`:
+```
+curl -d @input.json "http://localhost/v1/lyrx2sld/?replaceesri=false" -o output.sld
+```
