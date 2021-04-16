@@ -4,12 +4,12 @@ REST service for the conversion of ArcGIS Pro styling (format .lyrx) to GeoServe
 #### Local build and deploy
 ```
 docker build -t lyrx2sld .
-docker run -d -p 80:80 lyrx2sld
+docker run --rm -d --name lyrx2sld -p 80:80 lyrx2sld
 ```
 
 #### Alternative: using image from dockerhub
 ```
-docker run -d -p 80:80 vuilleumierc/lyrx2sld:latest
+docker run --rm -d --name lyrx2sld -p 80:80 vuilleumierc/lyrx2sld:latest
 ```
 
 #### Usage
