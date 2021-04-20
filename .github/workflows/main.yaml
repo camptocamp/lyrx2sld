@@ -28,8 +28,14 @@ jobs:
   publish:
     runs-on:
       ubuntu-20.04
+    needs:
+      build-and-test
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
         with:
           submodules: recursive
+      - uses: camptocamp/initialise-gopass-summon-action@v1
+        with:
+          ci-gpg-private-key: ${{secrets.CI_GPG_PRIVATE_KEY}}
+          github-gopass-ci-token: ${{secrets.GOPASS_CI_GITHUB_TOKEN}}
