@@ -41,7 +41,7 @@ class SLDParser():
 class TestService(TestCase):
 
     def test_point_symbology_replace_esri(self):
-        with open("./tests/data/bauinventarobjekte/input.lyrx") as f:
+        with open("./tests/data/input.lyrx") as f:
             obj = json.load(f)
         response = requests.post("http://localhost/v1/lyrx2sld?replaceesri=true", json=obj, timeout=30)
         data = SLDParser(response.text).as_dict()
