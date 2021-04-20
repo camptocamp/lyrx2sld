@@ -23,6 +23,6 @@ jobs:
         with:
           submodules: recursive
       - name: Build Docker image
-        run: docker build -t lyrx2sld vuilleumierc/lyrx2sld:latest .
+        run: docker build -t vuilleumierc/lyrx2sld:latest .
       - name: Publish image to Docker Hub
         run: docker push vuilleumierc/lyrx2sld:latest
