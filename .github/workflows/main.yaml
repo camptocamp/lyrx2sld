@@ -15,6 +15,15 @@ jobs:
         run: docker build -t lyrx2sld .
       - name: Run
         run: docker run -d -p 80:80 lyrx2sld
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run Python tests
+        run: pytest ./tests/tests.py -v
 
   publish:
     runs-on:
