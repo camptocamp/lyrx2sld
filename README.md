@@ -18,9 +18,9 @@ lyrx data should be sent as JSON to http://localhost/v1/lyrx2sld/ through a POST
 curl -d @/path/to/input.json http://localhost/v1/lyrx2sld/ -o /path/to/output.sld
 ```
 
-Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols, to be set to `true` (default) or `false`:
+Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols, to be set to `true` or `false` (default):
 ```
-curl -d @/path/to/input.json "http://localhost/v1/lyrx2sld/?replaceesri=false" -o /path/to/output.sld
+curl -d @/path/to/input.json "http://localhost/v1/lyrx2sld/?replaceesri=true" -o /path/to/output.sld
 ```
 Warnings and errors from bridge-style are written to the logs - to view them:
 ```
