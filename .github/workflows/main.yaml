@@ -8,5 +8,5 @@ jobs:
       ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: git submodule add git@github.com:camptocamp/bridge-style.git
+      - run: git submodule update --init
       - run: docker build -t lyrx2sld .
