@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  build:
+  build-and-test:
     runs-on:
       ubuntu-20.04
     steps:
@@ -13,13 +13,7 @@ jobs:
           submodules: recursive
       - name: Build Docker image
         run: docker build -t lyrx2sld .
-  tests:
-    needs:
-      build
-    runs-on:
-      ubuntu-20.04
-    steps:
-      - name: Runs Python tests
+      - name: Run
         run: docker run -d -p 80:80 lyrx2sld
 
   publish:
