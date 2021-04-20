@@ -30,6 +30,9 @@ jobs:
       ubuntu-20.04
     needs:
       build-and-test
+    env:
+      PATH: /bin:/usr/bin:/usr/local/bin:/home/runner/.local/bin
+      SUMMON_PROVIDER: /usr/local/bin/gopass
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
