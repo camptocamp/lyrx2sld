@@ -7,6 +7,8 @@ jobs:
     runs-on:
       ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - run: git submodule update --init
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - run: docker build -t lyrx2sld .
