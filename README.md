@@ -9,7 +9,7 @@ docker run --rm -d --name lyrx2sld -p 80:80 lyrx2sld
 
 #### Alternative: using image from dockerhub
 ```
-docker run --rm -d --name lyrx2sld -p 80:80 vuilleumierc/lyrx2sld:latest
+docker run --rm -d --name lyrx2sld -p 80:80 camptocamp/lyrx2sld:latest
 ```
 
 #### Usage
