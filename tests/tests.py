@@ -40,6 +40,16 @@ class SLDParser():
 
 class TestService(TestCase):
 
+    def test_point_symbology(self):
+        with open("./tests/data/input.lyrx") as f:
+            obj = json.load(f)
+        response = requests.post("http://localhost/v1/lyrx2sld", json=obj, timeout=30)
+        data = SLDParser(response.text).as_dict()
+        point_symbolizer = data['NamedLayer']['UserStyle']['FeatureTypeStyle']['Rule']['PointSymbolizer']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['NamedLayer']['Name'], 'Bauinventarobjekte')
+        self.assertEqual(point_symbolizer['Graphic']['Mark']['WellKnownName'], 'ttf://ESRI Default Marker#0x21')
+
     def test_point_symbology_replace_esri(self):
         with open("./tests/data/input.lyrx") as f:
             obj = json.load(f)
