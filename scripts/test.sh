@@ -1,4 +1,4 @@
-#! /bin/bash -e
+#! /bin/bash -eu
 folders=$(ls data/)
 input_file='input.lyrx'
 output_dir='/usr/share/geoserver/data_dir/styles/ag/'
