@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 
+import argparse
 import os.path
 import subprocess
 import sys
 
 
 def main():
+
+    parser = argparse.ArgumentParser(description="Publish Docker images")
+    parser.add_argument("--image", dest="image", help="The image to be exported")
+    parser.add_argument("--tag", dest="tag", default="dockerhub", help="Used repository",)
+    args = parser.parse_args()
+    image = args.image
+    tag = args.tag
 
     sys.stdout.flush()
 
@@ -23,8 +31,8 @@ def main():
             print(output_err.decode())
         sys.exit(1)
 
-    image = "camptocamp/lyrx2sld:latest"
-    subprocess.check_call(["docker", "push", image])
+    full_image = f"camptocamp/{image}:{tag}"
+    subprocess.check_call(["docker", "push", full_image])
 
 if __name__ == "__main__":
     main()

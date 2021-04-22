@@ -26,7 +26,7 @@ jobs:
         run: pytest tests/tests.py -v
 
   publish:
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/ci-push-image' }}
     runs-on:
       ubuntu-20.04
     needs:
@@ -45,4 +45,4 @@ jobs:
         with:
           ci-gpg-private-key: ${{secrets.CI_GPG_PRIVATE_KEY}}
           github-gopass-ci-token: ${{secrets.GOPASS_CI_GITHUB_TOKEN}}
-      - run: scripts/publish-docker
+      - run: scripts/publish-docker --image=lyrx2sld --tag=latest
