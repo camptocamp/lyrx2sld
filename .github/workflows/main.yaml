@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request, workflow_dispatch]
+on: [push]
 
 jobs:
   build-and-test:
@@ -26,7 +26,7 @@ jobs:
         run: pytest tests/tests.py -v
 
   publish:
-    if: ${{ github.ref == 'refs/heads/ci-push-image' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on:
       ubuntu-20.04
     needs:
