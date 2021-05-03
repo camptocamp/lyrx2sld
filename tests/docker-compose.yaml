@@ -1,0 +1,16 @@
+---
+version: '2.1'
+
+services:
+
+  lyrx2sld:
+    image: lyrx2sld
+    ports:
+      - 80:80
+
+  geoserver:
+    image: camptocamp/geoserver:2.17
+    ports:
+      - 8380:8080
+    volumes:
+      - ../data/geoserver_data_dir/:/mnt/geoserver_datadir
