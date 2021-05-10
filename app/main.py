@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import traceback
 
@@ -17,12 +17,12 @@ class Lyrx(BaseModel):
     type: str
     version: str
     build: int
-    layers: List[str]
+    layers: Optional[List[str]]
     layerDefinitions: List[dict]
-    binaryReferences: List[dict]
-    elevationSurfaces: List[dict]
-    rGBColorProfile: str
-    cMYKColorProfile: str
+    binaryReferences: Optional[List[dict]]
+    elevationSurfaces: Optional[List[dict]]
+    rGBColorProfile: Optional[str]
+    cMYKColorProfile: Optional[str]
 
 
 app = FastAPI()
