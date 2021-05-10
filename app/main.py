@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import traceback
 
@@ -20,7 +20,7 @@ class Lyrx(BaseModel):
     layers: List[str]
     layerDefinitions: List[dict]
     binaryReferences: List[dict]
-    elevationSurfaces: List[dict]
+    elevationSurfaces: Optional[List[dict]]
     rGBColorProfile: str
     cMYKColorProfile: str
 
