@@ -14,3 +14,4 @@ services:
       - 8380:8080
     volumes:
       - ../data/geoserver_data_dir/:/mnt/geoserver_datadir
+      - /home/$USER/.local/share/fonts/esri/:/usr/share/fonts/truetype/esri
