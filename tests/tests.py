@@ -20,11 +20,14 @@ class SLDParser():
         data = {}
         for subelement in element:
             tag = subelement.tag.split("}")[1]
-            text = subelement.text.strip()
-            if text:
+            try:
+                text = subelement.text.strip()
+            except AttributeError:
+                text = ""
+            if text != "":
                 try:
                     data[tag] = ast.literal_eval(text)
-                except:
+                except (SyntaxError, ValueError):
                     data[tag] = text
             else:
                 data[tag] = self.get_subelements(subelement)
