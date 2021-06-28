@@ -3,6 +3,8 @@
 from unittest import TestCase
 
 import json
+import io
+import zipfile
 import requests
 from xml.etree import ElementTree
 import ast
@@ -20,7 +22,7 @@ class SLDParser():
         data = {}
         for subelement in element:
             tag = subelement.tag.split("}")[1]
-            text = subelement.text.strip()
+            text = (subelement.text or "").strip()
             if text:
                 try:
                     data[tag] = ast.literal_eval(text)
@@ -38,15 +40,24 @@ class SLDParser():
     def as_dict(self):
         return self.data
 
+
+def get_style_from_zip_response(content):
+    with zipfile.ZipFile(io.BytesIO(content)) as z:
+        with z.open('style.sld') as f:
+            sld = f.read().decode('utf-8')
+            data = SLDParser(sld).as_dict()
+            return data
+
+
 class TestService(TestCase):
 
     def test_point_symbology(self):
         with open("./tests/data/input.lyrx") as f:
             obj = json.load(f)
         response = requests.post("http://localhost/v1/lyrx2sld", json=obj, timeout=30)
-        data = SLDParser(response.text).as_dict()
-        point_symbolizer = data['NamedLayer']['UserStyle']['FeatureTypeStyle']['Rule']['PointSymbolizer']
         self.assertEqual(response.status_code, 200)
+        data = get_style_from_zip_response(response.content)
+        point_symbolizer = data['NamedLayer']['UserStyle']['FeatureTypeStyle']['Rule']['PointSymbolizer']
         self.assertEqual(data['NamedLayer']['Name'], 'Bauinventarobjekte')
         self.assertEqual(point_symbolizer['Graphic']['Mark']['WellKnownName'], 'ttf://ESRI Default Marker#0x21')
 
@@ -54,8 +65,8 @@ class TestService(TestCase):
         with open("./tests/data/input.lyrx") as f:
             obj = json.load(f)
         response = requests.post("http://localhost/v1/lyrx2sld?replaceesri=true", json=obj, timeout=30)
-        data = SLDParser(response.text).as_dict()
-        point_symbolizer = data['NamedLayer']['UserStyle']['FeatureTypeStyle']['Rule']['PointSymbolizer']
         self.assertEqual(response.status_code, 200)
+        data = get_style_from_zip_response(response.content)
+        point_symbolizer = data['NamedLayer']['UserStyle']['FeatureTypeStyle']['Rule']['PointSymbolizer']
         self.assertEqual(data['NamedLayer']['Name'], 'Bauinventarobjekte')
         self.assertEqual(point_symbolizer['Graphic']['Mark']['WellKnownName'], 'circle')

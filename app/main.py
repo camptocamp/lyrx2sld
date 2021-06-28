@@ -1,3 +1,7 @@
+import os
+import io
+import zipfile
+
 from typing import List, Optional
 
 import traceback
@@ -37,16 +41,30 @@ async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = False):
     warnings = []
 
     try:
-        geostyler, _, w = togeostyler.convert(lyrx.dict(), options)
-        if w:
-            warnings.extend(w)
-        converted, w = fromgeostyler.convert(geostyler, options)
-        if w:
-            warnings.extend(w)
+        geostyler, icons, w = togeostyler.convert(lyrx.dict(), options)
+        warnings.extend(w)
+        converted, wb = fromgeostyler.convert(geostyler, options)
+        warnings.extend(w)
+
+        s = io.BytesIO()
+        z = zipfile.ZipFile(s, "w")
+
+        for icon in icons:
+            if icon:
+                z.write(icon, os.path.basename(icon))
+        z.writestr("style.sld", converted)
+        z.close()
+
         for warning in warnings:
             LOG.warning(warning)
-        return Response(content=converted, media_type="application/xml")
 
+        return Response(
+            content=s.getvalue(),
+            media_type="application/x-zip-compressed",
+            headers={
+                'Content-Disposition': 'attachment;filename=style.zip'
+                }
+            )
 
     except Exception as e:
         errors = traceback.format_exception(None, e, e.__traceback__)
