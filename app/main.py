@@ -1,6 +1,7 @@
 import os
 import io
 import zipfile
+from typing import List, Optional
 
 from typing import List, Optional
 
@@ -21,12 +22,12 @@ class Lyrx(BaseModel):
     type: str
     version: str
     build: int
-    layers: List[str]
+    layers: Optional[List[str]]
     layerDefinitions: List[dict]
-    binaryReferences: List[dict]
+    binaryReferences: Optional[List[dict]]
     elevationSurfaces: Optional[List[dict]]
-    rGBColorProfile: str
-    cMYKColorProfile: str
+    rGBColorProfile: Optional[str]
+    cMYKColorProfile: Optional[str]
 
 
 app = FastAPI()

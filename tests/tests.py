@@ -26,7 +26,7 @@ class SLDParser():
             if text:
                 try:
                     data[tag] = ast.literal_eval(text)
-                except:
+                except (SyntaxError, ValueError):
                     data[tag] = text
             else:
                 data[tag] = self.get_subelements(subelement)
