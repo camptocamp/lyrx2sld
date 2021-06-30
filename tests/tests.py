@@ -80,7 +80,7 @@ class TestService(TestCase):
         self.assertEqual(point_symbolizer['Graphic']['Mark']['WellKnownName'], 'circle')
 
     def test_icon_conversion(self):
-        with open(input_test_file("withicons.lyrx")) as f:
+        with open(input_test_file("withicons.lyrx"), encoding="utf-8") as f:
             obj = json.load(f)
         response = requests.post(APP_ENDPOINT, json=obj, timeout=30)
         self.assertEqual(response.status_code, 200)
