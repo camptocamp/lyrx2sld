@@ -46,3 +46,5 @@ jobs:
           ci-gpg-private-key: ${{secrets.CI_GPG_PRIVATE_KEY}}
           github-gopass-ci-token: ${{secrets.GOPASS_CI_GITHUB_TOKEN}}
       - run: scripts/publish-docker --image=lyrx2sld --tag=latest
+      - run: scripts/publish-docker --image=lyrx2sld --tag=${{ github.head_ref }}.${{ github.sha::6 }}
+      
