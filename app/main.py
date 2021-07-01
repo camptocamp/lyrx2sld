@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 import traceback
+import yaml
 
 from pydantic import BaseModel
 from fastapi import FastAPI, status, Response
@@ -28,7 +29,9 @@ class Lyrx(BaseModel):
 app = FastAPI()
 
 LOG = logging.getLogger("app")
-
+with open('config.yaml') as f:
+    config = yaml.load(f, Loader=yaml.FullLoader)
+    logging.config.dictConfig(config)
 
 @app.post("/v1/lyrx2sld/")
 async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = False):
