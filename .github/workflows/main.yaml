@@ -24,6 +24,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run Python tests
         run: pytest tests/tests.py -v
+      - name: Integration test
+        run: ./tests/integration_test.sh
 
   publish:
     if: ${{ github.ref == 'refs/heads/master' }}
