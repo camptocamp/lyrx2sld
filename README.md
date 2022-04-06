@@ -1,5 +1,13 @@
 # lyrx2sld
-lyrx2sld is a REST service for the conversion of ArcGIS Pro styling (format .lyrx) to GeoServer (format .sld, encapsulated in a .zip archive together with legend images, if any). The service encapsulates the [bridge-style](https://github.com/camptocamp/bridge-style) Python library and runs in Docker.
+lyrx2sld is a REST service for the conversion of ArcGIS Pro styling (format .lyrx) to GeoServer (format .sld, encapsulated in a .zip archive together with legend images, if any). The service encapsulates a styling library (see below for details) and runs in Docker.
+
+#### Styling library
+The service encapsulates the [bridge-style](https://github.com/camptocamp/bridge-style) library, which is written in Python and originally designed to be able to be used in plugins for ArcGis Desktop and QGIS Desktop, with the goal of allowing users to publish layer symbology to GeoServer.
+For that purpose, this library uses the [Geostyler](https://github.com/geostyler) JSON representation as a common internal representation format. 
+To meet the goals of lyrx2sld, this library was enhanced regarding its capabilities of interpreting the Lyrx format.
+See the [Cartographic Information Model documentation](https://github.com/Esri/cim-spec/tree/master/docs/v2) for information about Lyrx.
+
+Note that the styling library is currently not directly related to the [Geostyler projects](https://github.com/geostyler), but its logic might in the future be migrated to TypeScript to be able to function as a Geostyler project.
 
 #### Local build and deploy
 Be sure to clone the repository with the ```--recursive``` option, to also obtain the [bridge-style](https://github.com/camptocamp/bridge-style) as a submodule. If you have already cloned the repository without this option, do a ```git submodule update --remote``` to download the submodule.
