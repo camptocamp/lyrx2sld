@@ -21,12 +21,23 @@ class SLDParser():
         self.data = {}
         self.parse()
 
+    def strip_tag(self, tag):
+        try:
+            return tag.split("}")[1]
+        except IndexError:
+            return tag
+
     def get_subelements(self, element):
         data = {}
         for subelement in element:
-            tag = subelement.tag.split("}")[1]
+            tag = self.strip_tag(subelement.tag)
+            attrib = subelement.attrib
             text = (subelement.text or "").strip()
-            if text:
+            if attrib:
+                data[tag] = dict()
+                for item in attrib:
+                    data[tag][self.strip_tag(item)] = attrib[item]
+            elif text:
                 try:
                     data[tag] = ast.literal_eval(text)
                 except (SyntaxError, ValueError):
@@ -37,7 +48,7 @@ class SLDParser():
 
     def parse(self):
         for element in self.root:
-            tag = element.tag.split("}")[1]
+            tag = self.strip_tag(element.tag)
             self.data[tag] = self.get_subelements(element)
 
     def as_dict(self):
@@ -84,11 +95,13 @@ class TestService(TestCase):
             obj = json.load(f)
         response = requests.post(APP_ENDPOINT, json=obj, timeout=30)
         self.assertEqual(response.status_code, 200)
+        style = get_style_from_zip_response(response.content)
+        icon_file = style['NamedLayer']['UserStyle']['FeatureTypeStyle']['Rule']['PointSymbolizer']['Graphic']['ExternalGraphic']['OnlineResource']['href']
         with zipfile.ZipFile(io.BytesIO(response.content)) as z:
-            zippedfiles = {zipinfo.filename for zipinfo in z.infolist()}
-            self.assertEqual({"style.sld", "0.png"}, zippedfiles)
+            zipped_files = {zipinfo.filename for zipinfo in z.infolist()}
+            self.assertEqual({"style.sld", icon_file}, zipped_files)
             with open(expected_test_file("icon.png"), "rb") as f:
                 expected = f.read()
-            with z.open('0.png') as f:
+            with z.open(icon_file) as f:
                 output = f.read()
             self.assertEqual(expected, output)
