@@ -1,0 +1,40 @@
+<dataStore>
+  <id>DataStoreInfoImpl--baf9b6e:17930f5e8f5:-7ff9</id>
+  <name>agis</name>
+  <type>PostGIS</type>
+  <enabled>true</enabled>
+  <workspace>
+    <id>WorkspaceInfoImpl--baf9b6e:17930f5e8f5:-7ffc</id>
+  </workspace>
+  <connectionParameters>
+    <entry key="schema">agis</entry>
+    <entry key="Evictor run periodicity">300</entry>
+    <entry key="Max open prepared statements">50</entry>
+    <entry key="encode functions">true</entry>
+    <entry key="Batch insert size">1</entry>
+    <entry key="preparedStatements">false</entry>
+    <entry key="database">lyrx2sld</entry>
+    <entry key="host">172.17.0.1</entry>
+    <entry key="Loose bbox">true</entry>
+    <entry key="SSL mode">PREFER</entry>
+    <entry key="Estimated extends">true</entry>
+    <entry key="fetch size">1000</entry>
+    <entry key="Expose primary keys">false</entry>
+    <entry key="validate connections">true</entry>
+    <entry key="Support on the fly geometry simplification">true</entry>
+    <entry key="Connection timeout">20</entry>
+    <entry key="create database">false</entry>
+    <entry key="port">5432</entry>
+    <entry key="passwd">crypt1:+sqpMEMH0qd3SBY1ogM9ykE2afBuYBdd</entry>
+    <entry key="min connections">1</entry>
+    <entry key="dbtype">postgis</entry>
+    <entry key="namespace">agis</entry>
+    <entry key="max connections">10</entry>
+    <entry key="Evictor tests per run">3</entry>
+    <entry key="Test while idle">true</entry>
+    <entry key="user">www-data</entry>
+    <entry key="Max connection idle time">300</entry>
+  </connectionParameters>
+  <__default>false</__default>
+  <dateCreated>2021-05-03 06:47:40.178 UTC</dateCreated>
+</dataStore>

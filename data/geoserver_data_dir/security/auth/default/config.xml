@@ -1,0 +1,6 @@
+<usernamePassword>
+  <id>-3281f796:17930d918de:-7fe7</id>
+  <name>default</name>
+  <className>org.geoserver.security.auth.UsernamePasswordAuthenticationProvider</className>
+  <userGroupServiceName>default</userGroupServiceName>
+</usernamePassword>

@@ -1,0 +1,40 @@
+<featureType>
+  <id>FeatureTypeInfoImpl-76ff99a:17931091a82:-7ff1</id>
+  <name>afu_kbs</name>
+  <nativeName>afu_kbs</nativeName>
+  <namespace>
+    <id>NamespaceInfoImpl--baf9b6e:17930f5e8f5:-7ffb</id>
+  </namespace>
+  <title>afu_kbs</title>
+  <keywords>
+    <string>features</string>
+    <string>afu_kbs</string>
+  </keywords>
+  <srs>EPSG:2056</srs>
+  <nativeBoundingBox>
+    <minx>2620892.0</minx>
+    <maxx>2676534.5</maxx>
+    <miny>1221684.25</miny>
+    <maxy>1273904.5</maxy>
+  </nativeBoundingBox>
+  <latLonBoundingBox>
+    <minx>7.714067647039533</minx>
+    <maxx>8.456534052056105</maxx>
+    <miny>47.14171114017373</miny>
+    <maxy>47.61548201420887</maxy>
+    <crs>EPSG:4326</crs>
+  </latLonBoundingBox>
+  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+  <enabled>true</enabled>
+  <store class="dataStore">
+    <id>DataStoreInfoImpl--baf9b6e:17930f5e8f5:-7ff9</id>
+  </store>
+  <serviceConfiguration>false</serviceConfiguration>
+  <maxFeatures>0</maxFeatures>
+  <numDecimals>0</numDecimals>
+  <padWithZeros>false</padWithZeros>
+  <forcedDecimal>false</forcedDecimal>
+  <overridingServiceSRS>false</overridingServiceSRS>
+  <skipNumberMatched>false</skipNumberMatched>
+  <circularArcPresent>false</circularArcPresent>
+</featureType>

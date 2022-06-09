@@ -1,0 +1,16 @@
+<layer>
+  <name>kai_schulkr</name>
+  <id>LayerInfoImpl-76ff99a:17931091a82:-7fe4</id>
+  <type>VECTOR</type>
+  <defaultStyle>
+    <id>StyleInfoImpl--3281f796:17930d918de:-7ffc</id>
+  </defaultStyle>
+  <resource class="featureType">
+    <id>FeatureTypeInfoImpl-76ff99a:17931091a82:-7fe5</id>
+  </resource>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+  <dateCreated>2021-05-03 07:09:36.641 UTC</dateCreated>
+</layer>
