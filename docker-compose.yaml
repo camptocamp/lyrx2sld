@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+
+  db:
+    image: postgis/postgis:14-3.2-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+
+  geoserver:
+    image: camptocamp/geoserver:2.20.1
+    ports: 
+      - 8080:8080
+    volumes:
+      - ${ESRI_FONT_PATH:-/usr/local/share/fonts/esri}:/usr/local/share/fonts/esri:ro
+
+  lyrx2sld:
+    build: .
+    ports:
+      - 80:80
