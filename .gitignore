@@ -2,6 +2,7 @@
 data/
 tests/__pycache__/
 *~
+config.mk
 init-db
 init-geoserver
-
+docker-compose-up

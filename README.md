@@ -46,6 +46,17 @@ In order to test the resulting SLD in GeoServer with postgis layers, this repo a
 
 Requirements: `docker-compose`, `make`, `curl`, `psql`
 
+To ease the DB creation, add this in your ~/.pgpass file:
+```
+localhost:5432:geodata:postgres:postgres                                        
+localhost:5432:postgres:postgres:postgres
+```
+
+And create then update the config.mk file by running:
+```
+cp config.mk.template config.mk
+```
+
 Use the `make` targets to initialize and start it. After optionally changing the variables in the `config.mk` file, start the composition with
 ```
 make serve
@@ -53,7 +64,7 @@ make serve
 
 The GeoServer GUI will be available at http://localhost:8080/geoserver/ (credential admin / geoserver).
 
-With the `convert` target you can convert a symbology and upload it to GeoServer. First prepare a folder with the lyrx style file and a SQL script with the layer data and set the variables `BASE_PATH`, `SQL_SCRIPT` and `LYRX_FILE` in `config.mk`. Then run
+With the `convert` target you can convert a symbology and upload it to GeoServer. First prepare a folder with the lyrx style file and a SQL script with the layer data and set your config.mk file accordingly. Then run
 ```
 make convert
 ```
@@ -63,3 +74,9 @@ The SLD file will be save to the same folder and sent to GeoServer. In the GeoSe
 Further `make` targets are `clean` (to delete the newly created style from GeoServer) and `clean-all` (to delete the DB and and the GeoServer workspace).
 
 If you require ESRI fonts for your styles, they need to be installed on your system and the variable `ESRI_FONT_PATH` in the `.env` file has to point to the correct path.
+
+
+Stop the composition with:
+```
+make stop
+```

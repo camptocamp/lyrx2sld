@@ -1,0 +1,4 @@
+# Folder, SQL data and lyrx file to convert
+export BASE_PATH=
+export SQL_SCRIPT=
+export LYRX_FILE=
