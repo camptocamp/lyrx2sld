@@ -10,6 +10,7 @@ help: ## Display this help message
 
 docker-compose-up: ## Start docker composition
 docker-compose-up:
+	docker build -t lyrx2sld .
 	docker-compose up -d
 	sleep 5 # wait a bit on services
 	touch $@
@@ -40,9 +41,9 @@ convert: serve
 
 .PHONY: stop
 stop: ## Stop composition
-stop:
-	docker-compose down
+stop: clean-all
 	rm -f docker-compose-up
+	docker-compose down
 
 .PHONY: clean
 clean: ## Delete style from GeoServer

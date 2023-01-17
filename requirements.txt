@@ -1,2 +1,4 @@
 requests
 PyYAML
+# For debugging
+pydevd_pycharm~=213.7172.25 
