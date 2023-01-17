@@ -18,6 +18,10 @@ import logging
 from bridgestyle.arcgis import togeostyler
 from bridgestyle.sld import fromgeostyler
 
+# For debugging only
+import pydevd_pycharm
+pydevd_pycharm.settrace('172.17.0.1', port=5678, stdoutToServer=True, stderrToServer=True)
+
 
 class Lyrx(BaseModel):
     type: str

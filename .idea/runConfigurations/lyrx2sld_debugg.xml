@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="lyrx2sld-debugg" type="PyRemoteDebugConfigurationType" factoryName="Python Remote Debug">
+    <module name="lyrx2sld" />
+    <option name="PORT" value="5678" />
+    <option name="HOST" value="172.17.0.1" />
+    <PathMappingSettings>
+      <option name="pathMappings">
+        <list>
+          <mapping local-root="$PROJECT_DIR$/bridge-style/bridgestyle" remote-root="/usr/local/lib/python3.7/site-packages/bridgestyle" />
+          <mapping local-root="$PROJECT_DIR$/app" remote-root="/app" />
+        </list>
+      </option>
+    </PathMappingSettings>
+    <option name="REDIRECT_OUTPUT" value="true" />
+    <option name="SUSPEND_AFTER_CONNECT" value="true" />
+    <method v="2" />
+  </configuration>
+</component>

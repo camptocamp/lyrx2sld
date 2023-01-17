@@ -1,8 +1,9 @@
 .vscode/
 data/
 tests/__pycache__/
+app/__pycache__/
+app/mylog.log
 *~
 config.mk
 init-db
 init-geoserver
-docker-compose-up
