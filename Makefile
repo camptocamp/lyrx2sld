@@ -17,9 +17,9 @@ docker-compose-up:
 
 init-db: ## Create db and schema, add postgis extension
 init-db: docker-compose-up
-	psql -h localhost -U postgres -c 'CREATE DATABASE geodata;'
-	psql -h localhost -U postgres -d geodata -c 'CREATE EXTENSION postgis;'
-	psql -h localhost -U postgres --d geodata -c 'CREATE SCHEMA '$(PG_SCHEMA)';'
+	psql -h $(PG_HOST) -p $(PG_PORT) -U $(PG_USER) -c 'CREATE DATABASE $(PG_DATABASE);'
+	psql -h $(PG_HOST) -p $(PG_PORT) -U $(PG_USER) -d $(PG_DATABASE) -c 'CREATE EXTENSION postgis;'
+	psql -h $(PG_HOST) -p $(PG_PORT) -U $(PG_USER) -d $(PG_DATABASE) -c 'CREATE SCHEMA '$(PG_SCHEMA)';'
 	touch $@
 
 init-geoserver: ## Create workspace and add postgis datastore to GeoServer
@@ -35,7 +35,7 @@ serve: init-geoserver
 .PHONY: convert
 convert: ## Convert a style from lyrx to sld (input files set in config.mk) and upload it to GeoServer
 convert: serve
-	psql -h localhost -U postgres -d geodata -a -f $(BASE_PATH)/$(SQL_SCRIPT)
+	psql -h $(PG_HOST) -p $(PG_PORT) -U $(PG_USER) -d $(PG_DATABASE) -a -f $(BASE_PATH)/$(SQL_SCRIPT)
 	curl --location -d @$(BASE_PATH)/$(LYRX_FILE) $(LYRX2SLD_URL) -o $(BASE_PATH)/output.zip
 	curl -u admin:geoserver -XPOST -H "Content-type: application/zip" --data-binary @$(BASE_PATH)/output.zip $(GEOSERVER_URL)rest/styles
 
@@ -55,4 +55,4 @@ clean-all: clean
 	rm -f init-db
 	rm -f init-geoserver
 	curl -u admin:geoserver -X DELETE $(GEOSERVER_URL)rest/workspaces/$(GEOSERVER_WORKSPACE)?recurse=true -H  "accept: application/json" -H  "content-type: application/json"
-	psql -h localhost -U postgres -c 'DROP DATABASE geodata;'
+	psql -h $(PG_HOST) -p $(PG_PORT) -U $(PG_USER) -c 'DROP DATABASE $(PG_DATABASE);'
