@@ -9,3 +9,4 @@ config.mk
 init-db
 init-geoserver
 docker-compose-up
+env/
