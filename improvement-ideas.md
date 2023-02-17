@@ -9,6 +9,7 @@
 
 ## ArcGIS to Geostyler-style
 - For ArcGIS to Geostyler-style, convert unit from pt to px systematically.
+- Refactor the code in several files (instead of a single very long file)
 
 ## To Geostyler-style
 - Strict Geostyle-style:
