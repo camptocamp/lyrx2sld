@@ -60,7 +60,13 @@ make convert
 
 The SLD file will be saved in the same folder and sent to GeoServer. In the GeoServer GUI, you'll then need to publish the layer and to link it to the new style. The style will be named `Defaut Styler`.
 
-Further `make` targets are `clean` (to delete the newly created style from GeoServer), `clean-all` (to delete the DB and and the GeoServer workspace) and `stop` to stop the composition. To get a list of all targets and their description run
+Further `make` targets are:
+- `update` To convert again the style and update the newly created style in GeoServer.
+- `clean` To delete the newly created style from GeoServer (works only if no layer use this style).
+- `clean-all` To delete the DB and the GeoServer workspace.
+- `stop` To stop the composition.
+
+To get a list of all targets and their description run
 ```
 make help
 ```
