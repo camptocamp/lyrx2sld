@@ -10,7 +10,7 @@ services:
       - 5432:5432
 
   geoserver:
-    image: camptocamp/geoserver:2.24.1
+    image: docker.osgeo.org/geoserver:2.24.2
     ports: 
       - 8080:8080
     volumes:
