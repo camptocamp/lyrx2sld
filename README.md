@@ -24,12 +24,12 @@ docker run --rm -d --name lyrx2sld -p 80:80 camptocamp/lyrx2sld:latest
 ### Usage
 lyrx data should be sent as a file to http://localhost/v1/lyrx2sld/ through a POST request. The converted SLD styling is sent back in the response content (content type: application/x-zip-compressed). Example using `curl`:
 ```
-curl --location -d @/path/to/input.lyrx http://localhost/v1/lyrx2sld/ -o /path/to/output.zip
+curl --location -d @/path/to/input.lyrx -H 'Content-Type: application/json' -o /path/to/output.zip "http://localhost/v1/lyrx2sld/"
 ```
 
 Optional request parameter: `replaceesri` to replace ESRI font markers with standard symbols, to be set to `true` or `false` (default):
 ```
-curl --location -d @/path/to/input.lyrx "http://localhost/v1/lyrx2sld/?replaceesri=true" -o /path/to/output.zip
+curl --location -d @/path/to/input.lyrx -H 'Content-Type: application/json' -o /path/to/output.zip  "http://localhost/v1/lyrx2sld/?replaceesri=true"
 ```
 Warnings and errors from bridge-style are written to the logs - to view them:
 ```
