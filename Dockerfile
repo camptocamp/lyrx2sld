@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7-2020-12-19
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.11
 
 COPY ./bridge-style /tmp/bridge-style
 COPY requirements.txt /tmp/

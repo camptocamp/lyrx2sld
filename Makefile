@@ -36,12 +36,12 @@ serve: init-geoserver
 convert: ## Convert a style from lyrx to sld (input files set in config.mk) and upload it to GeoServer
 convert: serve
 	psql -h $(PG_HOST) -p $(PG_PORT) -U $(PG_USER) -d $(PG_DATABASE) -a -f $(BASE_PATH)/$(SQL_SCRIPT)
-	curl --location -d @$(BASE_PATH)/$(LYRX_FILE) $(LYRX2SLD_URL) -o $(BASE_PATH)/output.zip
+	curl -H 'Content-Type: application/json' --location -d @$(BASE_PATH)/$(LYRX_FILE) $(LYRX2SLD_URL) -o $(BASE_PATH)/output.zip
 	curl -u admin:geoserver -XPOST -H "Content-type: application/zip" --data-binary @$(BASE_PATH)/output.zip $(GEOSERVER_URL)rest/styles
 
 .PHONY: update
 update: ## Convert again the lyrx and update the already existing "Default Styler" style.
-	curl --location -d @$(BASE_PATH)/$(LYRX_FILE) $(LYRX2SLD_URL) -o $(BASE_PATH)/output.zip
+	curl -H 'Content-Type: application/json'--location -d @$(BASE_PATH)/$(LYRX_FILE) $(LYRX2SLD_URL) -o $(BASE_PATH)/output.zip
 	curl -u admin:geoserver -XPUT -H "Content-type: application/zip" --data-binary @$(BASE_PATH)/output.zip $(GEOSERVER_URL)rest/styles/Default%20Styler
 
 .PHONY: stop
