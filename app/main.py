@@ -1,9 +1,6 @@
 import os
 import io
 import zipfile
-from typing import List, Optional
-
-from typing import List, Optional
 
 import traceback
 import yaml
@@ -27,25 +24,26 @@ class Lyrx(BaseModel):
     type: str
     version: str
     build: int
-    layers: Optional[List[str]]
-    layerDefinitions: List[dict]
-    binaryReferences: Optional[List[dict]]
-    elevationSurfaces: Optional[List[dict]]
-    rGBColorProfile: Optional[str]
-    cMYKColorProfile: Optional[str]
+    layers: list[str] | None = None
+    layerDefinitions: list[dict]
+    binaryReferences: list[dict] | None = None
+    elevationSurfaces: list[dict] | None = None
+    rGBColorProfile: str | None = None
+    cMYKColorProfile: str | None
 
 
 app = FastAPI()
 
 LOG = logging.getLogger("app")
-with open('config.yaml') as f:
+with open("config.yaml") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
     logging.config.dictConfig(config)
+
 
 @app.post("/v1/lyrx2sld/")
 async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = False):
 
-    options = {'tolowercase': True, 'replaceesri': replaceesri}
+    options = {"tolowercase": True, "replaceesri": replaceesri}
     warnings = []
 
     try:
@@ -69,10 +67,8 @@ async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = False):
         return Response(
             content=s.getvalue(),
             media_type="application/x-zip-compressed",
-            headers={
-                'Content-Disposition': 'attachment;filename=style.zip'
-                }
-            )
+            headers={"Content-Disposition": "attachment;filename=style.zip"},
+        )
 
     except Exception as e:
         errors = traceback.format_exception(None, e, e.__traceback__)
@@ -80,9 +76,5 @@ async def lyrx_to_sld(lyrx: Lyrx, replaceesri: bool = False):
             LOG.error(error)
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            content=jsonable_encoder(
-                {
-                    'warnings': warnings,
-                    'errors': errors
-                })
-            )
+            content=jsonable_encoder({"warnings": warnings, "errors": errors}),
+        )

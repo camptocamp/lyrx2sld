@@ -22,5 +22,5 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./bridge-style/bridgestyle:/usr/local/lib/python3.7/site-packages/bridgestyle # For debug purpose 
+      - ./bridge-style/bridgestyle:/usr/local/lib/python3.12/site-packages/bridgestyle # For debug purpose
       - ./app:/app # For debug purpose 
