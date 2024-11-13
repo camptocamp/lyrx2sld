@@ -28,4 +28,4 @@ else
 fi
 
 # Start Uvicorn with live reload
-exec uvicorn --reload --reload-dir /usr/local/lib/python3.7/site-packages/bridgestyle --reload-dir /app --host $HOST --port $PORT --log-level $LOG_LEVEL "$APP_MODULE"
+exec uvicorn --reload --reload-dir /usr/local/lib/python3.12/site-packages/bridgestyle --reload-dir /app --host $HOST --port $PORT --log-level $LOG_LEVEL "$APP_MODULE"

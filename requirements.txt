@@ -1,4 +1,6 @@
-requests
-PyYAML
+fastapi[standard]==0.115.0
+pydantic==2.9.2
+PyYAML==6.0.2
+requests==2.32.3
 # For debugging
-pydevd_pycharm~=213.7172.25 
+# pydevd_pycharm~=213.7172.25
