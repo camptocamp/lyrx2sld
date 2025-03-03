@@ -41,7 +41,7 @@ convert: serve
 
 .PHONY: update
 update: ## Convert again the lyrx and update the already existing "Default Styler" style.
-	curl -H 'Content-Type: application/json'--location -d @$(BASE_PATH)/$(LYRX_FILE) $(LYRX2SLD_URL) -o $(BASE_PATH)/output.zip
+	curl -H 'Content-Type: application/json' --location -d @$(BASE_PATH)/$(LYRX_FILE) $(LYRX2SLD_URL) -o $(BASE_PATH)/output.zip
 	curl -u admin:geoserver -XPUT -H "Content-type: application/zip" --data-binary @$(BASE_PATH)/output.zip $(GEOSERVER_URL)rest/styles/Default%20Styler
 
 .PHONY: stop
