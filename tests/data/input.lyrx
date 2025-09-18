@@ -143,7 +143,7 @@
         },
         "dataConnection" : {
           "type" : "CIMStandardDataConnection",
-          "workspaceConnectionString" : "AUTHENTICATION_MODE=DBMS;DATABASE=AGIS_312_Prod;DBCLIENT=sqlserver;DB_CONNECTION_PROPERTIES=sqlA-AGIS-312-Prod;ENCRYPTED_PASSWORD=00022e686f6f3157313934364657414f50714a364a6a65787847324951786a6f364a376b556d4768727859387335553d2a00;INSTANCE=sde:sqlserver: sqlA-AGIS-312-Prod;SERVER=SqlServer;USER=agistools",
+          "workspaceConnectionString" : "",
           "workspaceFactory" : "SDE",
           "dataset" : "AGIS.ka_bauinventarobj",
           "datasetType" : "esriDTFeatureClass"
