@@ -208,7 +208,7 @@
         },
         "dataConnection" : {
           "type" : "CIMStandardDataConnection",
-          "workspaceConnectionString" : "ENCRYPTED_PASSWORD=00022e68724455726471596a486a4f75644b6a6e7669536864325a625a652f5451523658464c67374b46536a6167413d2a00;SERVER=SqlServer;INSTANCE=sde:sqlserver:sqlA-AGIS-312-Prod;DBCLIENT=sqlserver;DB_CONNECTION_PROPERTIES=sqlA-AGIS-312-Prod;DATABASE=AGIS_312_Prod;USER=agistools;AUTHENTICATION_MODE=DBMS",
+          "workspaceConnectionString" : "",
           "workspaceFactory" : "SDE",
           "dataset" : "AGIS_312_Prod.AGIS.alg_fledermausquar",
           "datasetType" : "esriDTFeatureClass"
